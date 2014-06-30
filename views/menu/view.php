@@ -8,8 +8,8 @@ use yii\widgets\DetailView;
  * @var mdm\admin\models\Menu $model
  */
 
-$this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Menus', 'url' => ['index']];
+$this->title = $model->men_nombre;
+$this->params['breadcrumbs'][] = ['label' => 'Menús', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="menu-view">
@@ -17,11 +17,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+        <?= Html::a('Modificar', ['update', 'id' => $model->men_id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Delete', ['delete', 'id' => $model->men_id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => '¿Seguro que desea borrar este Item?',
                 'method' => 'post',
             ],
         ]) ?>
@@ -30,10 +30,10 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'menuParent.name:text:Parent',
-            'name',
-            'route',
-            'order',
+            'menuParent.men_nombre:text:Parent',
+            'men_nombre',
+            'men_url',
+            'men_orden',
         ],
     ]) ?>
 

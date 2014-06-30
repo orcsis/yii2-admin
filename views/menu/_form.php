@@ -17,28 +17,28 @@ use mdm\admin\models\Menu;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'name')->textInput(['maxlength' => 128]) ?>
+    <?= $form->field($model, 'men_nombre')->textInput(['maxlength' => 128]) ?>
 
     <?= $form->field($model, 'parent_name')->widget(AutoComplete::className(),[
         'options'=>['class'=>'form-control'],
         'clientOptions'=>[
-            'source'=>  Menu::find()->select(['name'])->column()
+            'source'=>  Menu::find()->select(['men_nombre'])->column()
         ]
     ]) ?>
 
-    <?= $form->field($model, 'route')->widget(AutoComplete::className(),[
+    <?= $form->field($model, 'men_url')->widget(AutoComplete::className(),[
         'options'=>['class'=>'form-control'],
         'clientOptions'=>[
             'source'=>  AccessHelper::getSavedRoutes()
         ]
     ]) ?>
 
-    <?= $form->field($model, 'order')->input('number') ?>
+    <?= $form->field($model, 'men_orden')->input('number') ?>
 
-    <?= $form->field($model, 'data')->textarea(['rows' => 4]) ?>
+    <?= $form->field($model, 'men_data')->textarea(['rows' => 4]) ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Crear' : 'Actualizar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

@@ -88,7 +88,7 @@ class Module extends \yii\base\Module implements \yii\base\BootstrapInterface
             ],
             'menu' => [
                 'class' => 'mdm\admin\items\MenuController',
-                'visible' => $this->db !== null && $this->db->schema->getTableSchema('{{%menu}}') !== null
+                'visible' => $this->db !== null && $this->db->schema->getTableSchema('osmenu') !== null
             ],
         ];
     }

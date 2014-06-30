@@ -9,7 +9,7 @@ use yii\widgets\Pjax;
  * @var yii\data\ActiveDataProvider $dataProvider
  * @var mdm\admin\models\searchs\Menu $searchModel
  */
-$this->title = 'Menus';
+$this->title = 'Menús';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="menu-index">
@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]);  ?>
 
     <p>
-        <?= Html::a('Create Menu', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Crear Menú', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php
@@ -29,15 +29,15 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             [
-                'attribute' => 'menuParent.name',
+                'attribute' => 'menuParent.men_name',
                 'filter' => Html::activeTextInput($searchModel, 'parent_name', [
-                    'class' => 'form-control', 'id' => null
+                    'class' => 'form-control', 'men_id' => null
                 ]),
-                'label' => 'Parent'
+                'label' => 'Padre'
             ],
-            'name',
-            'route',
-            'order',
+            'men_nombre',
+            'men_url',
+            'men_orden',
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]);

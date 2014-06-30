@@ -17,19 +17,19 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'id') ?>
+    <?= $form->field($model, 'men_id') ?>
 
-    <?= $form->field($model, 'name') ?>
+    <?= $form->field($model, 'men_nombre') ?>
 
-    <?= $form->field($model, 'parent') ?>
+    <?= $form->field($model, 'men_parent') ?>
 
-    <?= $form->field($model, 'route') ?>
+    <?= $form->field($model, 'men_url') ?>
 
-    <?= $form->field($model, 'data') ?>
+    <?= $form->field($model, 'men_data') ?>
     
     <div class="form-group">
-        <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('Reset', ['class' => 'btn btn-default']) ?>
+        <?= Html::submitButton('Buscar', ['class' => 'btn btn-primary']) ?>
+        <?= Html::resetButton('Limpiar', ['class' => 'btn btn-default']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

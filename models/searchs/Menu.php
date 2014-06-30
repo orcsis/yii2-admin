@@ -16,8 +16,8 @@ class Menu extends MenuModel
     public function rules()
     {
         return [
-            [['id', 'parent', 'order'], 'integer'],
-            [['name', 'route', 'parent_name'], 'safe'],
+            [['men_id', 'men_parent', 'men_orden'], 'integer'],
+            [['men_nombre', 'men_url', 'parent_name'], 'safe'],
         ];
     }
 
@@ -35,32 +35,32 @@ class Menu extends MenuModel
             'query' => $query
         ]);
 
-        $query->leftJoin(['parent' => 'menu'], 'menu.parent=parent.id');
+        $query->leftJoin(['men_parent' => 'osmenu'], 'osmenu.men_parent=men_parent.id');
         $sort = $dataProvider->getSort();
-        $sort->attributes['menuParent.name'] = [
-            'asc' => ['parent.name' => SORT_ASC],
-            'desc' => ['parent.name' => SORT_DESC],
-            'label' => 'parent',
+        $sort->attributes['menuParent.men_nombre'] = [
+            'asc' => ['men_parent.men_nombre' => SORT_ASC],
+            'desc' => ['men_parent.men_nombre' => SORT_DESC],
+            'label' => 'men_parent',
         ];
-        $sort->attributes['order'] = [
-            'asc' => ['parent.order' => SORT_ASC, 'menu.order' => SORT_ASC],
-            'desc' => ['parent.order' => SORT_DESC, 'menu.order' => SORT_DESC],
-            'label' => 'order',
+        $sort->attributes['men_orden'] = [
+            'asc' => ['men_parent.men_orden' => SORT_ASC, 'osmenu.men_orden' => SORT_ASC],
+            'desc' => ['men_parent.men_orden' => SORT_DESC, 'osmenu.men_orden' => SORT_DESC],
+            'label' => 'men_orden',
         ];
-        $sort->defaultOrder = ['menuParent.name' => SORT_ASC];
+        $sort->defaultOrder = ['menuParent.men_nombre' => SORT_ASC];
 
         if (!($this->load($params) && $this->validate())) {
             return $dataProvider;
         }
 
         $query->andFilterWhere([
-            'id' => $this->id,
-            'parent' => $this->parent,
+            'men_id' => $this->men_id,
+            'men_parent' => $this->men_parent,
         ]);
 
-        $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'route', $this->route])
-            ->andFilterWhere(['like', 'parent.name', $this->parent_name]);
+        $query->andFilterWhere(['like', 'men_nombre', $this->men_nombre])
+            ->andFilterWhere(['like', 'men_url', $this->men_url])
+            ->andFilterWhere(['like', 'men_parent.men_nombre', $this->parent_name]);
 
 
         return $dataProvider;

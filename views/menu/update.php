@@ -7,10 +7,10 @@ use yii\helpers\Html;
  * @var mdm\admin\models\Menu $model
  */
 
-$this->title = 'Update Menu: ' . ' ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Menus', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->title = 'Modificar Menú: ' . ' ' . $model->name;
+$this->params['breadcrumbs'][] = ['label' => 'Menús', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => $model->men_nombre, 'url' => ['view', 'id' => $model->men_id]];
+$this->params['breadcrumbs'][] = 'Actualizar';
 ?>
 <div class="menu-update">
 

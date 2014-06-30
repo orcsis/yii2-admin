@@ -7,7 +7,7 @@ use yii\helpers\Html;
  * @var mdm\admin\models\Menu $model
  */
 
-$this->title = 'Create Menu';
+$this->title = 'Crear Menú';
 $this->params['breadcrumbs'][] = ['label' => 'Menus', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
