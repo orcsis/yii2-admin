@@ -35,13 +35,14 @@ class Menu extends MenuModel
             'query' => $query
         ]);
 
-        $query->leftJoin(['men_parent' => 'osmenu'], 'osmenu.men_parent=men_parent.id');
+        $query->leftJoin(['men_parent' => 'osmenu'], 'osmenu.men_parent=men_parent.men_id');
         $sort = $dataProvider->getSort();
         $sort->attributes['menuParent.men_nombre'] = [
             'asc' => ['men_parent.men_nombre' => SORT_ASC],
             'desc' => ['men_parent.men_nombre' => SORT_DESC],
             'label' => 'men_parent',
         ];
+
         $sort->attributes['men_orden'] = [
             'asc' => ['men_parent.men_orden' => SORT_ASC, 'osmenu.men_orden' => SORT_ASC],
             'desc' => ['men_parent.men_orden' => SORT_DESC, 'osmenu.men_orden' => SORT_DESC],
