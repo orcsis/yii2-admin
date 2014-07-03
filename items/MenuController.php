@@ -1,11 +1,11 @@
 <?php
 
-namespace mdm\admin\items;
+namespace orcsis\admin\items;
 
 use Yii;
-use mdm\admin\models\Menu;
-use mdm\admin\models\searchs\Menu as MenuSearch;
-use mdm\admin\components\Controller;
+use orcsis\admin\models\Menu;
+use orcsis\admin\models\searchs\Menu as MenuSearch;
+use orcsis\admin\components\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 

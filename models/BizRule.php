@@ -1,8 +1,8 @@
 <?php
 
-namespace mdm\admin\models;
+namespace orcsis\admin\models;
 
-use mdm\admin\components\BizRule as TBizRule;
+use orcsis\admin\components\BizRule as TBizRule;
 use yii\rbac\Rule;
 use Yii;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace mdm\admin\components;
+namespace orcsis\admin\components;
 
 /**
  * Description of RuleRoute

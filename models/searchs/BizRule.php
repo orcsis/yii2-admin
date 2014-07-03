@@ -1,11 +1,11 @@
 <?php
 
-namespace mdm\admin\models\searchs;
+namespace orcsis\admin\models\searchs;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ArrayDataProvider;
-use mdm\admin\models\BizRule as MBizRule;
+use orcsis\admin\models\BizRule as MBizRule;
 
 /**
  * Description of BizRule

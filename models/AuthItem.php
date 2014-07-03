@@ -1,6 +1,6 @@
 <?php
 
-namespace mdm\admin\models;
+namespace orcsis\admin\models;
 
 use Yii;
 use yii\rbac\Item;

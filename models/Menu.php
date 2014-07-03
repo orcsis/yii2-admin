@@ -1,9 +1,9 @@
 <?php
 
-namespace mdm\admin\models;
+namespace orcsis\admin\models;
 
 use Yii;
-use mdm\admin\components\AccessHelper;
+use orcsis\admin\components\AccessHelper;
 
 /**
  * Model Class para la tabla "osmenu".

@@ -1,5 +1,5 @@
 <?php
-namespace mdm\admin\models;
+namespace orcsis\admin\models;
 /**
  * Description of Route
  *

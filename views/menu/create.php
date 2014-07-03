@@ -4,7 +4,7 @@ use yii\helpers\Html;
 
 /**
  * @var yii\web\View $this
- * @var mdm\admin\models\Menu $model
+ * @var orcsis\admin\models\Menu $model
  */
 
 $this->title = 'Crear Menú';

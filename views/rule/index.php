@@ -7,7 +7,7 @@ use yii\widgets\Pjax;
 /**
  * @var yii\web\View $this
  * @var yii\data\ActiveDataProvider $dataProvider
- * @var mdm\admin\models\AuthItemSearch $searchModel
+ * @var orcsis\admin\models\AuthItemSearch $searchModel
  */
 $this->title = 'Rules';
 $this->params['breadcrumbs'][] = $this->title;

@@ -1,9 +1,9 @@
 <?php
 
-namespace mdm\admin;
+namespace orcsis\admin;
 
 use Yii;
-use mdm\admin\components\AccessControl;
+use orcsis\admin\components\AccessControl;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Inflector;
 use yii\db\Connection;
@@ -72,22 +72,22 @@ class Module extends \yii\base\Module implements \yii\base\BootstrapInterface
 
         return [
             'assigment' => [
-                'class' => 'mdm\admin\items\AssigmentController'
+                'class' => 'orcsis\admin\items\AssigmentController'
             ],
             'role' => [
-                'class' => 'mdm\admin\items\RoleController'
+                'class' => 'orcsis\admin\items\RoleController'
             ],
             'permission' => [
-                'class' => 'mdm\admin\items\PermissionController'
+                'class' => 'orcsis\admin\items\PermissionController'
             ],
             'route' => [
-                'class' => 'mdm\admin\items\RouteController'
+                'class' => 'orcsis\admin\items\RouteController'
             ],
             'rule' => [
-                'class' => 'mdm\admin\items\RuleController'
+                'class' => 'orcsis\admin\items\RuleController'
             ],
             'menu' => [
-                'class' => 'mdm\admin\items\MenuController',
+                'class' => 'orcsis\admin\items\MenuController',
                 'visible' => $this->db !== null && $this->db->schema->getTableSchema('osmenu') !== null
             ],
         ];

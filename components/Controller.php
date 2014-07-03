@@ -1,13 +1,13 @@
 <?php
 
-namespace mdm\admin\components;
+namespace orcsis\admin\components;
 
 /**
  * Description of Controller
  *
  * @author MDMunir
  * 
- * @property \mdm\admin\Module $module
+ * @property \orcsis\admin\Module $module
  */
 class Controller extends \yii\web\Controller
 {

@@ -5,7 +5,7 @@ use yii\widgets\DetailView;
 
 /**
  * @var yii\web\View $this
- * @var mdm\admin\models\Menu $model
+ * @var orcsis\admin\models\Menu $model
  */
 
 $this->title = $model->men_nombre;

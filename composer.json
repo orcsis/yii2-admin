@@ -19,6 +19,6 @@
                 "yiisoft/yii2-jui": "*"
         },
         "autoload": {
-                "psr-4": { "mdm\\admin\\": "" }
+                "psr-4": { "orcsis\\admin\\": "" }
         }
 }

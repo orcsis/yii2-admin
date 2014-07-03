@@ -3,12 +3,12 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\jui\AutoComplete;
-use mdm\admin\components\AccessHelper;
-use mdm\admin\models\Menu;
+use orcsis\admin\components\AccessHelper;
+use orcsis\admin\models\Menu;
 
 /**
  * @var yii\web\View $this
- * @var mdm\admin\models\Menu $model
+ * @var orcsis\admin\models\Menu $model
  * @var yii\widgets\ActiveForm $form
  */
 ?>

@@ -1,15 +1,15 @@
 <?php
 
-namespace mdm\admin\items;
+namespace orcsis\admin\items;
 
-use mdm\admin\models\Assigment;
-use mdm\admin\models\searchs\Assigment as AssigmentSearch;
-use mdm\admin\components\Controller;
+use orcsis\admin\models\Assigment;
+use orcsis\admin\models\searchs\Assigment as AssigmentSearch;
+use orcsis\admin\components\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use Yii;
 use yii\helpers\Html;
-use mdm\admin\components\AccessHelper;
+use orcsis\admin\components\AccessHelper;
 use yii\web\Response;
 
 /**

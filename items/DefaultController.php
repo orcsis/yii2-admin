@@ -1,8 +1,8 @@
 <?php
 
-namespace mdm\admin\items;
+namespace orcsis\admin\items;
 
-class DefaultController extends \mdm\admin\components\Controller
+class DefaultController extends \orcsis\admin\components\Controller
 {
 	public function actionIndex()
 	{

@@ -1,15 +1,15 @@
 <?php
 
-namespace mdm\admin\items;
+namespace orcsis\admin\items;
 
-use mdm\admin\components\AccessHelper;
+use orcsis\admin\components\AccessHelper;
 use Yii;
-use mdm\admin\models\Route;
+use orcsis\admin\models\Route;
 use yii\web\Response;
 use yii\helpers\Html;
 use Exception;
 
-class RouteController extends \mdm\admin\components\Controller
+class RouteController extends \orcsis\admin\components\Controller
 {
 
     public function actionIndex()

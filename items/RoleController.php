@@ -1,15 +1,15 @@
 <?php
 
-namespace mdm\admin\items;
+namespace orcsis\admin\items;
 
-use mdm\admin\models\AuthItem;
-use mdm\admin\models\searchs\AuthItem as AuthItemSearch;
-use mdm\admin\components\Controller;
+use orcsis\admin\models\AuthItem;
+use orcsis\admin\models\searchs\AuthItem as AuthItemSearch;
+use orcsis\admin\components\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\rbac\Item;
 use Yii;
-use mdm\admin\components\AccessHelper;
+use orcsis\admin\components\AccessHelper;
 use yii\helpers\Html;
 
 /**

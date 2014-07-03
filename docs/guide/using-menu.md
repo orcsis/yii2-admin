@@ -5,7 +5,7 @@ Menu manager used for build hierarchical menu. This is automatically look of use
 role and permision then return menus that he has access.
 
 ```php
-use mdm\admin\components\AccessHelper;
+use orcsis\admin\components\AccessHelper;
 use yii\bootstrap\Nav;
 
 echo Nav::widget([
@@ -13,7 +13,7 @@ echo Nav::widget([
 ]);
 
 ```
-Return of `mdm\admin\components\AccessHelper::getAssignedMenu()` has default format like:
+Return of `orcsis\admin\components\AccessHelper::getAssignedMenu()` has default format like:
 ```php
 [
     [
@@ -41,7 +41,7 @@ Return of `mdm\admin\components\AccessHelper::getAssignedMenu()` has default for
 ]
 ```
 where `$menu` variable corresponden with a record of table `menu`. You can customize 
-return format of `mdm\admin\components\AccessHelper::getAssignedMenu()` by provide a callback to this methode.
+return format of `orcsis\admin\components\AccessHelper::getAssignedMenu()` by provide a callback to this methode.
 The callback must have format `function($menu){}`. E.g:
 ```php
 $callback = function($menu){

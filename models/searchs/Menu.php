@@ -1,14 +1,14 @@
 <?php
 
-namespace mdm\admin\models\searchs;
+namespace orcsis\admin\models\searchs;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use mdm\admin\models\Menu as MenuModel;
+use orcsis\admin\models\Menu as MenuModel;
 
 /**
- * Menu represents the model behind the search form about `mdm\admin\models\Menu`.
+ * Menu represents the model behind the search form about `orcsis\admin\models\Menu`.
  */
 class Menu extends MenuModel
 {

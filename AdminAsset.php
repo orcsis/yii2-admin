@@ -1,5 +1,5 @@
 <?php
-namespace mdm\admin;
+namespace orcsis\admin;
 /**
  * Description of AdminAsset
  *

@@ -5,7 +5,7 @@ use yii\widgets\ActiveForm;
 
 /**
  * @var yii\web\View $this
- * @var mdm\admin\models\AuthItem $model
+ * @var orcsis\admin\models\AuthItem $model
  * @var yii\widgets\ActiveForm $form
  */
 ?>
@@ -22,7 +22,7 @@ use yii\widgets\ActiveForm;
     <?=
         $form->field($model, 'expresion')
         ->textarea(['rows' => 2,
-            'disabled' => $model->className != '' && $model->className != 'mdm\admin\components\BizRule'])
+            'disabled' => $model->className != '' && $model->className != 'orcsis\admin\components\BizRule'])
         ->hint('Simple PHP expresion')
     ?>
 
@@ -39,7 +39,7 @@ use yii\widgets\ActiveForm;
 $js = <<< JS
 \$('#bizrule-classname').change(function(){
     var val = this.value;
-    var className = 'mdm\\\\admin\\\\components\\\\BizRule';
+    var className = 'orcsis\\\\admin\\\\components\\\\BizRule';
     if(val=='' || val==className){
         \$('#bizrule-expresion').removeAttr('disabled');
     }else{

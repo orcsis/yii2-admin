@@ -6,7 +6,7 @@ use yii\helpers\Html;
  * @var \yii\web\View $this
  * @var string $content
  */
-//$asset = mdm\admin\AdminAsset::register($this);
+//$asset = orcsis\admin\AdminAsset::register($this);
 $menus = $this->context->module->menus;
 ?>
 <div class="row">

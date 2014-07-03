@@ -7,7 +7,7 @@ use yii\widgets\Pjax;
 /**
  * @var yii\web\View $this
  * @var yii\data\ActiveDataProvider $dataProvider
- * @var mdm\admin\models\searchs\Menu $searchModel
+ * @var orcsis\admin\models\searchs\Menu $searchModel
  */
 $this->title = 'Menús';
 $this->params['breadcrumbs'][] = $this->title;
@@ -45,9 +45,3 @@ $this->params['breadcrumbs'][] = $this->title;
     ?>
 
 </div>
-<pre>
-    <?php
-    $menus = \mdm\admin\components\AccessHelper::getAssignedMenu(Yii::$app->user->id);
-    print_r($menus);
-    ?>
-</pre>

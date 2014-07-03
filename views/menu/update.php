@@ -4,10 +4,10 @@ use yii\helpers\Html;
 
 /**
  * @var yii\web\View $this
- * @var mdm\admin\models\Menu $model
+ * @var orcsis\admin\models\Menu $model
  */
 
-$this->title = 'Modificar Menú: ' . ' ' . $model->name;
+$this->title = 'Modificar Menú: ' . ' ' . $model->men_nombre;
 $this->params['breadcrumbs'][] = ['label' => 'Menús', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->men_nombre, 'url' => ['view', 'id' => $model->men_id]];
 $this->params['breadcrumbs'][] = 'Actualizar';

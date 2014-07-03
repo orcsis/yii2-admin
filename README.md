@@ -40,7 +40,7 @@ return [
 	],
 	'modules' => [
 		'admin' => [
-			'class' => 'mdm\admin\Module',
+			'class' => 'orcsis\admin\Module',
 			'allowActions' => [
 				'admin/*', // add or remove allowed actions to this list
 			]
