@@ -17,6 +17,17 @@ class AccessHelper
 {
     const FILE_GROUP = 'file';
     const AUTH_GROUP = 'auth';
+    const ROUTE_RULE_NAME = 'route_rule';
+
+    public static function setDefaultRouteRule()
+    {
+        if (Yii::$app->authManager->getRule(self::ROUTE_RULE_NAME) === null) {
+            Yii::$app->authManager->add(Yii::createObject([
+                    'class' => RouteRule::className(),
+                    'name' => self::ROUTE_RULE_NAME]
+            ));
+        }
+    }
 
     /**
      * 
@@ -30,7 +41,7 @@ class AccessHelper
             self::getRouteRecrusive(Yii::$app, $result);
             if ($cache !== null) {
                 $cache->set($key, $result, 0, new GroupDependency([
-                    'group' => static::getGroup(static::FILE_GROUP)
+                    'group' => static::getGroup(self::FILE_GROUP)
                 ]));
             }
         }
@@ -117,7 +128,7 @@ class AccessHelper
             }
             if ($cache !== null) {
                 $cache->set($key, $result, 0, new GroupDependency([
-                    'group' => static::getGroup(static::AUTH_GROUP)
+                    'group' => static::getGroup(self::AUTH_GROUP)
                 ]));
             }
         }
@@ -127,12 +138,17 @@ class AccessHelper
     /**
      * 
      * @param mixed $userId
+     * @param integer $root
      * @param \Closure $callback function($menu){}
+     * @param boolean $refresh
+     * @return array
      * 
      */
-    public static function getAssignedMenu($userId, $callback = null, $refresh = false)
+    public static function getAssignedMenu($userId, $root = null, $callback = null, $refresh = false)
     {
-        $key = static::buildKey([__METHOD__, $userId]);
+        $key = static::buildKey([__METHOD__, $userId, $root]);
+        $refresh = $refresh || $callback !== null;
+
         if ($refresh || ($cache = Yii::$app->getCache()) === null || ($result = $cache->get($key)) === false) {
             $manager = \Yii::$app->getAuthManager();
             $routes = $filter1 = $filter2 = [];
@@ -169,10 +185,10 @@ class AccessHelper
             }
             $menus = Menu::find()->asArray()->indexBy('men_id')->all();
             $assigned = static::requiredParent($assigned, $menus);
-            $result = static::normalizeMenu($assigned, $menus, $callback);
+            $result = static::normalizeMenu($assigned, $menus, $callback, $root);
             if (isset($cache)) {
                 $cache->set($key, $result, 0, new GroupDependency([
-                    'group' => static::getGroup(static::AUTH_GROUP)
+                    'group' => static::getGroup(self::AUTH_GROUP)
                 ]));
             }
         }
@@ -203,9 +219,21 @@ class AccessHelper
                 if ($callback !== null) {
                     $item = call_user_func($callback, $menu);
                 } else {
+                    if (!empty($menu['men_url'])) {
+                        $url = [];
+                        $r = explode('&', $menu['men_url']);
+                        $url[0] = $r[0];
+                        unset($r[0]);
+                        foreach ($r as $part) {
+                            $part = explode('=', $part);
+                            $url[$part[0]] = isset($part[1]) ? $part[1] : '';
+                        }
+                    } else {
+                        $url = '#';
+                    }
                     $item = [
                         'label' => $menu['men_nombre'],
-                        'url' => empty($menu['men_url']) ? '#' : [$menu['men_url']]
+                        'url' => $url,
                     ];
                     if ($menu['children'] != []) {
                         $item['items'] = $menu['children'];
@@ -237,14 +265,14 @@ class AccessHelper
     public static function refeshFileCache()
     {
         if (($cache = Yii::$app->getCache()) !== null) {
-            GroupDependency::invalidate($cache, static::getGroup(static::FILE_GROUP));
+            GroupDependency::invalidate($cache, static::getGroup(self::FILE_GROUP));
         }
     }
 
     public static function refeshAuthCache()
     {
         if (($cache = Yii::$app->getCache()) !== null) {
-            GroupDependency::invalidate($cache, static::getGroup(static::AUTH_GROUP));
+            GroupDependency::invalidate($cache, static::getGroup(self::AUTH_GROUP));
         }
     }
 }
