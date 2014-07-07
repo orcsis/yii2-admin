@@ -65,7 +65,7 @@ class Menu extends \yii\db\ActiveRecord
                 }
                 $parent = $parent->menuParent;
             }
-            $this->parent = $parent_id;
+            $this->men_parent = $parent_id;
         }
     }
 
