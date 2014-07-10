@@ -49,6 +49,11 @@ class Module extends \yii\base\Module implements \yii\base\BootstrapInterface
      * @var Connection 
      */
     public $db = 'db';
+    
+    /**
+     * @var string Nombre
+     */
+    public $name = 'Administrar';
 
     public function init()
     {

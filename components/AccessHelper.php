@@ -173,16 +173,17 @@ class AccessHelper
                 }
             }
             $assigned = [];
+            $cWhereModule = '(men_modulo = \'' . Yii::$app->params['moduleActive']['module'] . '\' OR men_modulo = \'\')';
             $query = Menu::find()->select(['men_id'])->asArray();
             if (count($filter2)) {
-                $assigned = $query->where(['men_url' => $filter2])->column();
+                $assigned = $query->where(['men_modulo' => [Yii::$app->params['moduleActive']['module'], ''] ,'men_url' => $filter2])->column();
             }
             if (count($filter1)) {
-                $query->where('men_url like :filter');
+                $query->where('men_url like :filter and ' . $cWhereModule);
                 foreach ($filter1 as $filter) {
                     $assigned = array_merge($assigned, $query->params([':filter' => $filter])->column());
                 }
-            }
+            }  
             $menus = Menu::find()->asArray()->indexBy('men_id')->all();
             $assigned = static::requiredParent($assigned, $menus);
             $result = static::normalizeMenu($assigned, $menus, $callback, $root);
