@@ -25,6 +25,13 @@ use orcsis\admin\models\Menu;
             'source'=>  Menu::find()->select(['men_nombre'])->column()
         ]
     ]) ?>
+    
+    <?= $form->field($model, 'men_modulo')->widget(AutoComplete::className(),[
+        'options'=>['class'=>'form-control'],
+        'clientOptions'=>[
+            'source'=>  AccessHelper::getModules()
+        ]
+    ]) ?>
 
     <?= $form->field($model, 'men_url')->widget(AutoComplete::className(),[
         'options'=>['class'=>'form-control'],

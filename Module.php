@@ -95,6 +95,9 @@ class Module extends \yii\base\Module implements \yii\base\BootstrapInterface
                 'class' => 'orcsis\admin\items\MenuController',
                 'visible' => $this->db !== null && $this->db->schema->getTableSchema('osmenu') !== null
             ],
+            'osusuarios' => [
+                'class' => 'orcsis\admin\items\OsusuariosController'
+            ],
         ];
     }
 

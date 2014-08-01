@@ -33,13 +33,13 @@ class AccessHelper
      * 
      * @return array
      */
-    public static function getRoutes($refresh = false)
+    public static function getRoutes($refresh = true)
     {
         $key = static::buildKey(__METHOD__);
         if ($refresh || ($cache = Yii::$app->getCache()) === null || ($result = $cache->get($key)) === false) {
             $result = [];
             self::getRouteRecrusive(Yii::$app, $result);
-            if ($cache !== null) {
+            if (isset($cache)) {
                 $cache->set($key, $result, 0, new GroupDependency([
                     'group' => static::getGroup(self::FILE_GROUP)
                 ]));
@@ -275,5 +275,11 @@ class AccessHelper
         if (($cache = Yii::$app->getCache()) !== null) {
             GroupDependency::invalidate($cache, static::getGroup(self::AUTH_GROUP));
         }
+    }
+    
+    public static function getModules()
+    {
+    	$modules = Yii::$app->getModules();
+    	return array_merge([Yii::$app->id], array_keys($modules));
     }
 }

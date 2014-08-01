@@ -43,7 +43,10 @@ class Menu extends \yii\db\ActiveRecord
             [['parent_name'], 'in',
                 'range' => self::find()->select(['men_nombre'])->column(),
                 'message' => 'Menú "{value}" no encontrado.'],
-            [['men_parent', 'men_url', 'men_data', 'men_orden'], 'default'],
+            [['men_modulo'], 'in',
+                'range' => AccessHelper::getModules(),
+                'message' => 'Módulo "{value}" no encontrado.'],
+            [['men_parent', 'men_url', 'men_data', 'men_orden', 'men_modulo'], 'default'],
             [['men_orden'], 'integer'],
             [['men_url'], 'in',
                 'range' => AccessHelper::getSavedRoutes(),
@@ -80,6 +83,10 @@ class Menu extends \yii\db\ActiveRecord
             'men_parent' => 'Padre',
             'parent_name' => 'Padre',
             'men_url' => 'Url/Ruta',
+            'men_modulo' => 'Módulo',
+            'men_data' => 'Configuración',
+            'men_orden' => 'Orden',
+            'men_descri' => 'Descripción'
         ];
     }
 
