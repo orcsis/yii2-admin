@@ -65,8 +65,13 @@ class OsusuariosController extends Controller
     public function actionCreate()
     {
         $model = new Osusuarios;
+        
+        $val = $model->load(Yii::$app->request->post());
+        if($val){
+        	$model->setPassword($model->usu_clave);
+        }
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ( $val && $model->save()) {
             return $this->redirect(['view', 'id' => $model->usu_id]);
         } else {
             return $this->render('create', [
@@ -83,9 +88,19 @@ class OsusuariosController extends Controller
      */
     public function actionUpdate($id)
     {
+    	$passChanged = false;
         $model = $this->findModel($id);
+        $post = Yii::$app->request->post();
+        if(!$model->validatePassword($post['usu_clave']) ) {
+        	$passChanged = true;
+        }
+        
+        $val = $model->load($post);
+        if($val && $passChanged) {
+        	$model->setPassword($model->usu_clave);
+        }
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($val && $model->save()) {
             return $this->redirect(['view', 'id' => $model->usu_id]);
         } else {
             return $this->render('update', [
@@ -119,7 +134,7 @@ class OsusuariosController extends Controller
         if (($model = Osusuarios::findOne($id)) !== null) {
             return $model;
         } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
+            throw new NotFoundHttpException(Yii::t('app','The requested page does not exist.'));
         }
     }
 }

@@ -25,18 +25,19 @@ $this->params['breadcrumbs'][] = $this->title;
 ]), ['create'], ['class' => 'btn btn-success'])*/  ?>
     </p>
 
-    <?php Pjax::begin(); echo GridView::widget([
+    <?php echo GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+    	'pjax' => true,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'usu_id',
+            //'usu_id',
             'usu_nomusu',
             'usu_nombre',
-            'usu_clave',
+            //'usu_clave',
             ['attribute'=>'usu_feccre','format'=>['datetime',(isset(Yii::$app->modules['datecontrol']['displaySettings']['datetime'])) ? Yii::$app->modules['datecontrol']['displaySettings']['datetime'] : 'd-m-Y H:i:s A']],
-//            ['attribute'=>'usu_ulting','format'=>['datetime',(isset(Yii::$app->modules['datecontrol']['displaySettings']['datetime'])) ? Yii::$app->modules['datecontrol']['displaySettings']['datetime'] : 'd-m-Y H:i:s A']], 
+            ['attribute'=>'usu_ulting','format'=>['datetime',(isset(Yii::$app->modules['datecontrol']['displaySettings']['datetime'])) ? Yii::$app->modules['datecontrol']['displaySettings']['datetime'] : 'd-m-Y H:i:s A']], 
 //            'usu_activo', 
 //            'usu_token', 
 //            'usu_ultemp', 
@@ -60,6 +61,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'hover'=>true,
         'condensed'=>true,
         'floatHeader'=>true,
+        //'showPageSummary' => true,
 
 
 
@@ -70,6 +72,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'before'=>Html::a('<i class="glyphicon glyphicon-plus"></i> Add', ['create'], ['class' => 'btn btn-success']),                                                                                                                                                          'after'=>Html::a('<i class="glyphicon glyphicon-repeat"></i> Reset List', ['index'], ['class' => 'btn btn-info']),
             'showFooter'=>false
         ],
-    ]); Pjax::end(); ?>
+    ]); ?>
 
 </div>
