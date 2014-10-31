@@ -4,11 +4,11 @@ use yii\helpers\Html;
 
 /**
  * @var yii\web\View $this
- * @var orcsis\admin\models\AuthItem $model
+ * @var mdm\admin\models\AuthItem $model
  */
 
-$this->title = 'Create Rule';
-$this->params['breadcrumbs'][] = ['label' => 'Rules', 'url' => ['index']];
+$this->title = Yii::t('rbac-admin', 'Create Rule');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('rbac-admin', 'Rules'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="auth-item-create">
@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	<h1><?= Html::encode($this->title) ?></h1>
 
 	<?php echo $this->render('_form', [
-		'model' => $model,
-	]); ?>
+        'model' => $model,
+    ]); ?>
 
 </div>

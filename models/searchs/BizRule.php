@@ -1,17 +1,18 @@
 <?php
 
-namespace orcsis\admin\models\searchs;
+namespace mdm\admin\models\searchs;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ArrayDataProvider;
-use orcsis\admin\models\BizRule as MBizRule;
-use orcsis\admin\components\AccessHelper;
+use mdm\admin\models\BizRule as MBizRule;
+use mdm\admin\components\RouteRule;
 
 /**
  * Description of BizRule
  *
- * @author MDMunir
+ * @author Misbahul D Munir <misbahuldmunir@gmail.com>
+ * @since 1.0
  */
 class BizRule extends Model
 {
@@ -28,7 +29,17 @@ class BizRule extends Model
     }
 
     /**
-     * 
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'name' => Yii::t('rbac-admin', 'Name'),
+        ];
+    }
+
+    /**
+     * Search BizRule
      * @param array $params
      * @return \yii\data\ActiveDataProvider|\yii\data\ArrayDataProvider
      */
@@ -39,10 +50,11 @@ class BizRule extends Model
         $models = [];
         $included = !($this->load($params) && $this->validate() && trim($this->name) !== '');
         foreach ($authManager->getRules() as $name => $item) {
-            if ($name != AccessHelper::ROUTE_RULE_NAME && ($included || stripos($item->name, $this->name) !== false)) {
+            if ($name != RouteRule::RULE_NAME && ($included || stripos($item->name, $this->name) !== false)) {
                 $models[$name] = new MBizRule($item);
             }
         }
+
         return new ArrayDataProvider([
             'allModels' => $models,
         ]);

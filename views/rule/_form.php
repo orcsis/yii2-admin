@@ -5,7 +5,7 @@ use yii\widgets\ActiveForm;
 
 /**
  * @var yii\web\View $this
- * @var orcsis\admin\models\AuthItem $model
+ * @var mdm\admin\models\AuthItem $model
  * @var yii\widgets\ActiveForm $form
  */
 ?>
@@ -14,14 +14,13 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-
     <?= $form->field($model, 'name')->textInput(['maxlength' => 64]) ?>
 
     <?= $form->field($model, 'className')->textInput() ?>
 
     <div class="form-group">
         <?php
-        echo Html::submitButton($model->isNewRecord ? 'Create' : 'Update', [
+        echo Html::submitButton($model->isNewRecord ? Yii::t('rbac-admin', 'Create') : Yii::t('rbac-admin', 'Update'), [
             'class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary'])
         ?>
     </div>

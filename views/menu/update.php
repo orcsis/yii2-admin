@@ -2,15 +2,13 @@
 
 use yii\helpers\Html;
 
-/**
- * @var yii\web\View $this
- * @var orcsis\admin\models\Menu $model
- */
+/* @var $this yii\web\View */
+/* @var $model mdm\admin\models\Menu */
 
-$this->title = 'Modificar Menú: ' . ' ' . $model->men_nombre;
-$this->params['breadcrumbs'][] = ['label' => 'Menús', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->men_nombre, 'url' => ['view', 'id' => $model->men_id]];
-$this->params['breadcrumbs'][] = 'Actualizar';
+$this->title = Yii::t('rbac-admin', 'Update Menu') . ': ' . ' ' . $model->name;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('rbac-admin', 'Menus'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = Yii::t('rbac-admin', 'Update');
 ?>
 <div class="menu-update">
 

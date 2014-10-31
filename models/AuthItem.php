@@ -1,10 +1,9 @@
 <?php
 
-namespace orcsis\admin\models;
+namespace mdm\admin\models;
 
 use Yii;
 use yii\rbac\Item;
-use yii\helpers\VarDumper;
 use yii\helpers\Json;
 
 /**
@@ -17,6 +16,9 @@ use yii\helpers\Json;
  * @property string $data
  *
  * @property Item $item
+ *
+ * @author Misbahul D Munir <misbahuldmunir@gmail.com>
+ * @since 1.0
  */
 class AuthItem extends \yii\base\Model
 {
@@ -27,14 +29,13 @@ class AuthItem extends \yii\base\Model
     public $data;
 
     /**
-     *
-     * @var Item 
+     * @var Item
      */
     private $_item;
 
     /**
-     * 
-     * @param Item $item
+     * Initialize object
+     * @param Item  $item
      * @param array $config
      */
     public function __construct($item, $config = [])
@@ -72,28 +73,42 @@ class AuthItem extends \yii\base\Model
     public function attributeLabels()
     {
         return [
-            'name' => 'Name',
-            'type' => 'Type',
-            'description' => 'Description',
-            'ruleName' => 'Rule Name',
-            'data' => 'Data',
+            'name' => Yii::t('rbac-admin', 'Name'),
+            'type' => Yii::t('rbac-admin', 'Type'),
+            'description' => Yii::t('rbac-admin', 'Description'),
+            'ruleName' => Yii::t('rbac-admin', 'Rule Name'),
+            'data' => Yii::t('rbac-admin', 'Data'),
         ];
     }
 
+    /**
+     * Check if is new record.
+     * @return boolean
+     */
     public function getIsNewRecord()
     {
         return $this->_item === null;
     }
 
+    /**
+     * Find role
+     * @param string $id
+     * @return null|\self
+     */
     public static function find($id)
     {
         $item = Yii::$app->authManager->getRole($id);
         if ($item !== null) {
             return new self($item);
         }
+
         return null;
     }
 
+    /**
+     * Save role to [[\yii\rbac\authManager]]
+     * @return boolean
+     */
     public function save()
     {
         if ($this->validate()) {
@@ -118,6 +133,7 @@ class AuthItem extends \yii\base\Model
             } else {
                 $manager->update($oldName, $this->_item);
             }
+
             return true;
         } else {
             return false;
@@ -125,7 +141,7 @@ class AuthItem extends \yii\base\Model
     }
 
     /**
-     * 
+     * Get item
      * @return Item
      */
     public function getItem()
@@ -133,6 +149,11 @@ class AuthItem extends \yii\base\Model
         return $this->_item;
     }
 
+    /**
+     * Get type name
+     * @param  mixed $type
+     * @return string|array
+     */
     public static function getTypeName($type = null)
     {
         $result = [
@@ -142,6 +163,7 @@ class AuthItem extends \yii\base\Model
         if ($type === null) {
             return $result;
         }
+
         return $result[$type];
     }
 }

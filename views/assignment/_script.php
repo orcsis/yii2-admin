@@ -14,7 +14,7 @@ use yii\helpers\Url;
                     setTimeout(function () {
                         _onSearch = false;
                         var data = {
-                            id:<?= json_encode($name)?>,
+                            id:<?= json_encode($id) ?>,
                             target:$th.data('target'),
                             term: $th.val(),
                         };
@@ -28,14 +28,14 @@ use yii\helpers\Url;
             },
             action: function () {
                 var action = $(this).data('action');
-                var params = $((action == 'assign' ? '#avaliable' : '#assigned')+', .role-search').serialize();
-                var urlAssign = '<?= Url::toRoute(['assign', 'id' => $name,'action'=>'assign']) ?>';
-                var urlDelete = '<?= Url::toRoute(['assign', 'id' => $name,'action'=>'delete']) ?>';
+                var params = $((action == 'assign' ? '#avaliable' : '#assigned') + ', .role-search').serialize();
+                var urlAssign = '<?= Url::toRoute(['assign', 'id' => $id,'action'=>'assign']) ?>';
+                var urlDelete = '<?= Url::toRoute(['assign', 'id' => $id,'action'=>'delete']) ?>';
                 $.post(action=='assign'?urlAssign : urlDelete,
-                params,function (r) {
-                    $('#avaliable').html(r[0]);
-                    $('#assigned').html(r[1]);
-                },'json');
+                    params, function (r) {
+                        $('#avaliable').html(r[0]);
+                        $('#assigned').html(r[1]);
+                    });
 
                 return false;
             }

@@ -4,12 +4,11 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 
-/**
- * @var yii\web\View $this
- * @var yii\data\ActiveDataProvider $dataProvider
- * @var orcsis\admin\models\searchs\Menu $searchModel
- */
-$this->title = 'Menús';
+/* @var $this yii\web\View */
+/* @var $dataProvider yii\data\ActiveDataProvider */
+/* @var $searchModel mdm\admin\models\searchs\Menu */
+
+$this->title = Yii::t('rbac-admin', 'Menus');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="menu-index">
@@ -18,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]);  ?>
 
     <p>
-        <?= Html::a('Crear Menú', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('rbac-admin', 'Create Menu'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php
@@ -29,15 +28,15 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             [
-                'attribute' => 'menuParent.men_nombre',
+                'attribute' => 'menuParent.name',
                 'filter' => Html::activeTextInput($searchModel, 'parent_name', [
-                    'class' => 'form-control', 'men_id' => null
+                    'class' => 'form-control', 'id' => null
                 ]),
-                'label' => 'Padre'
+                'label' => Yii::t('rbac-admin', 'Parent'),
             ],
-            'men_nombre',
-            'men_url',
-            'men_orden',
+            'name',
+            'route',
+            'order',
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]);

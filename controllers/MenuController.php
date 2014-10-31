@@ -1,20 +1,26 @@
 <?php
 
-namespace orcsis\admin\items;
+namespace mdm\admin\controllers;
 
 use Yii;
-use orcsis\admin\models\Menu;
-use orcsis\admin\models\searchs\Menu as MenuSearch;
-use orcsis\admin\components\Controller;
+use mdm\admin\models\Menu;
+use mdm\admin\models\searchs\Menu as MenuSearch;
+use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
  * MenuController implements the CRUD actions for Menu model.
+ *
+ * @author Misbahul D Munir <misbahuldmunir@gmail.com>
+ * @since 1.0
  */
 class MenuController extends Controller
 {
 
+    /**
+     * @inheritdoc
+     */
     public function behaviors()
     {
         return [
@@ -44,7 +50,7 @@ class MenuController extends Controller
 
     /**
      * Displays a single Menu model.
-     * @param integer $id
+     * @param  integer $id
      * @return mixed
      */
     public function actionView($id)
@@ -64,7 +70,7 @@ class MenuController extends Controller
         $model = new Menu;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->men_id]);
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                     'model' => $model,
@@ -75,17 +81,17 @@ class MenuController extends Controller
     /**
      * Updates an existing Menu model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     * @param  integer $id
      * @return mixed
      */
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
         if ($model->menuParent) {
-            $model->parent_name = $model->menuParent->men_nombre;
+            $model->parent_name = $model->menuParent->name;
         }
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->men_id]);
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                     'model' => $model,
@@ -96,7 +102,7 @@ class MenuController extends Controller
     /**
      * Deletes an existing Menu model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     * @param  integer $id
      * @return mixed
      */
     public function actionDelete($id)
@@ -109,7 +115,7 @@ class MenuController extends Controller
     /**
      * Finds the Menu model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
+     * @param  integer $id
      * @return Menu the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */

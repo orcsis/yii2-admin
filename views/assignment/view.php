@@ -1,24 +1,19 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
-use yii\helpers\ArrayHelper;
-use yii\helpers\Url;
-use yii\web\JsExpression;
 
-/**
- * @var yii\web\View $this
- * @var yii\data\ActiveDataProvider $dataProvider
- * @var orcsis\admin\models\AssigmentSearch $searchModel
- */
-$this->title = 'Assigments';
+/* @var $this yii\web\View */
+/* @var $model yii\web\IdentityInterface */
+
+$this->title = Yii::t('rbac-admin', 'Assignments');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="assigment-index">
-    <h1>User: <?= $model->{$usernameField} ?></h1>
+<div class="assignment-index">
+    <?= Html::a(Yii::t('rbac-admin', 'Users'), ['index'], ['class'=>'btn btn-success']) ?>
+    <h1><?= Yii::t('rbac-admin', 'User') ?>: <?= $model->{$usernameField} ?></h1>
 
     <div class="col-lg-5">
-        Avaliable: 
+        <?= Yii::t('rbac-admin', 'Avaliable') ?>:
         <?php
         echo Html::textInput('search_av', '', ['class' => 'role-search', 'data-target' => 'avaliable']) . '<br>';
         echo Html::listBox('roles', '', $avaliable, [
@@ -36,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ?>
     </div>
     <div class="col-lg-5">
-        Assigned: 
+        <?= Yii::t('rbac-admin', 'Assigned') ?>:
         <?php
         echo Html::textInput('search_asgn', '', ['class' => 'role-search', 'data-target' => 'assigned']) . '<br>';
         echo Html::listBox('roles', '', $assigned, [

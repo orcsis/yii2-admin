@@ -1,24 +1,25 @@
 <?php
 
-namespace orcsis\admin\models;
+namespace mdm\admin\models;
 
 use Yii;
-use orcsis\admin\components\AccessHelper;
+use mdm\admin\components\Configs;
 
 /**
- * Model Class para la tabla "osmenu".
+ * This is the model class for table "menu".
  *
- * @property integer $men_id
- * @property string $men_nombre
- * @property integer $men_parent
- * @property string $men_descri
- * @property string $men_modulo 
- * @property string $men_url
- * @property integer $men_orden
- * @property string $men_data
- * 
- * @property Menu $menuParent
- * @property Menu[] $menus
+ * @property integer $id Menu id(autoincrement)
+ * @property string $name Menu name
+ * @property integer $parent Menu parent
+ * @property string $route Route for this menu
+ * @property integer $order Menu order
+ * @property string $data Extra information for this menu
+ *
+ * @property Menu $menuParent Menu parent
+ * @property Menu[] $menus Menu children
+ *
+ * @author Misbahul D Munir <misbahuldmunir@gmail.com>
+ * @since 1.0
  */
 class Menu extends \yii\db\ActiveRecord
 {
@@ -29,7 +30,19 @@ class Menu extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'osmenu';
+        return Configs::instance()->menuTable;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public static function getDb()
+    {
+        if (Configs::instance()->db !== null) {
+            return Configs::instance()->db;
+        } else {
+            return parent::getDb();
+        }
     }
 
     /**
@@ -38,37 +51,38 @@ class Menu extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['men_nombre'], 'required'],
+            [['name'], 'required'],
             [['parent_name'], 'filterParent'],
             [['parent_name'], 'in',
-                'range' => self::find()->select(['men_nombre'])->column(),
-                'message' => 'Menú "{value}" no encontrado.'],
-            [['men_modulo'], 'in',
-                'range' => AccessHelper::getModules(),
-                'message' => 'Módulo "{value}" no encontrado.'],
-            [['men_parent', 'men_url', 'men_data', 'men_orden', 'men_modulo'], 'default'],
-            [['men_orden'], 'integer'],
-            [['men_url'], 'in',
-                'range' => AccessHelper::getSavedRoutes(),
-                'message' => 'Url "{value}" no encontrada.']
+                'range' => static::find()->select(['name'])->column(),
+                'message' => 'Menu "{value}" not found.'],
+            [['parent', 'route', 'data', 'order'], 'default'],
+            [['order'], 'integer'],
+            [['route'], 'in',
+                'range' => static::getSavedRoutes(),
+                'message' => 'Route "{value}" not found.']
         ];
     }
 
+    /**
+     * Use to loop detected.
+     */
     public function filterParent()
     {
         $value = $this->parent_name;
-        $parent = self::findOne(['men_nombre' => $value]);
+        $parent = self::findOne(['name' => $value]);
         if ($parent) {
-            $id = $this->men_id;
-            $parent_id = $parent->men_id;
+            $id = $this->id;
+            $parent_id = $parent->id;
             while ($parent) {
-                if ($parent->men_id == $id) {
-                    $this->addError('parent_name', 'Bucle detectado.');
+                if ($parent->id == $id) {
+                    $this->addError('parent_name', 'Loop detected.');
+
                     return;
                 }
                 $parent = $parent->menuParent;
             }
-            $this->men_parent = $parent_id;
+            $this->parent = $parent_id;
         }
     }
 
@@ -78,31 +92,47 @@ class Menu extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'men_id' => 'ID',
-            'men_nombre' => 'Nombre',
-            'men_parent' => 'Padre',
-            'parent_name' => 'Padre',
-            'men_url' => 'Url/Ruta',
-            'men_modulo' => 'Módulo',
-            'men_data' => 'Configuración',
-            'men_orden' => 'Orden',
-            'men_descri' => 'Descripción'
+            'id' => Yii::t('rbac-admin', 'ID'),
+            'name' => Yii::t('rbac-admin', 'Name'),
+            'parent' => Yii::t('rbac-admin', 'Parent'),
+            'parent_name' => Yii::t('rbac-admin', 'Parent Name'),
+            'route' => Yii::t('rbac-admin', 'Route'),
+            'order' => Yii::t('rbac-admin', 'Order'),
+            'data' => Yii::t('rbac-admin', 'Data'),
         ];
     }
 
     /**
+     * Get menu parent
      * @return \yii\db\ActiveQuery
      */
     public function getMenuParent()
     {
-        return $this->hasOne(Menu::className(), ['men_id' => 'men_parent']);
+        return $this->hasOne(Menu::className(), ['id' => 'parent']);
     }
 
     /**
+     * Get menu children
      * @return \yii\db\ActiveQuery
      */
     public function getMenus()
     {
-        return $this->hasMany(Menu::className(), ['men_parent' => 'men_id']);
+        return $this->hasMany(Menu::className(), ['parent' => 'id']);
+    }
+
+    /**
+     * Get saved routes.
+     * @return array
+     */
+    public static function getSavedRoutes()
+    {
+        $result = [];
+        foreach (Yii::$app->getAuthManager()->getPermissions() as $name => $value) {
+            if ($name[0] === '/' && substr($name, -1) != '*') {
+                $result[] = $name;
+            }
+        }
+
+        return $result;
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace orcsis\admin\components;
+namespace mdm\admin\components;
 
 use yii\web\ForbiddenHttpException;
 use yii\base\Module;
@@ -9,24 +9,38 @@ use yii\web\User;
 use yii\di\Instance;
 
 /**
- * Description of AccessControl
+ * Access Control Filter (ACF) is a simple authorization method that is best used by applications that only need some simple access control. 
+ * As its name indicates, ACF is an action filter that can be attached to a controller or a module as a behavior. 
+ * ACF will check a set of access rules to make sure the current user can access the requested action.
  *
- * @author MDMunir
+ * To use AccessControl, declare it in the application config as behavior.
+ * For example.
+ *
+ * ~~~
+ * 'as access' => [
+ *     'class' => 'mdm\admin\components\AccessControl',
+ *     'allowActions' => ['site/login', 'site/error']
+ * ]
+ * ~~~
+ *
+ * @author Misbahul D Munir <misbahuldmunir@gmail.com>
+ * @since 1.0
  */
 class AccessControl extends \yii\base\ActionFilter
 {
     /**
-     *
-     * @var User 
+     * @var User User for check access.
      */
     public $user = 'user';
 
     /**
-     *
-     * @var array 
+     * @var array List of action that not need to check access.
      */
     public $allowActions = [];
 
+    /**
+     * @inheritdoc
+     */
     public function init()
     {
         parent::init();
@@ -52,12 +66,12 @@ class AccessControl extends \yii\base\ActionFilter
         } while ($obj !== null);
         $this->denyAccess($user);
     }
-    
+
     /**
      * Denies the access of the user.
      * The default implementation will redirect the user to the login page if he is a guest;
      * if the user is already logged, a 403 HTTP exception will be thrown.
-     * @param yii\web\User $user the current user
+     * @param  yii\web\User $user the current user
      * @throws yii\web\ForbiddenHttpException if the user is already logged in.
      */
     protected function denyAccess($user)
@@ -65,7 +79,7 @@ class AccessControl extends \yii\base\ActionFilter
         if ($user->getIsGuest()) {
             $user->loginRequired();
         } else {
-            throw new ForbiddenHttpException(Yii::t('yii', 'No está autorizado para realizar esta acción.'));
+            throw new ForbiddenHttpException(Yii::t('yii', 'You are not allowed to perform this action.'));
         }
     }
 
@@ -74,8 +88,6 @@ class AccessControl extends \yii\base\ActionFilter
      */
     protected function isActive($action)
     {
-    	Yii::$app->params['moduleActive']['module'] = $action->controller->module->id;
-    	Yii::$app->params['moduleActive']['name'] = isset($action->controller->module->name) ? $action->controller->module->name : Yii::$app->params['moduleActive']['name'];
         $uniqueId = $action->getUniqueId();
         if ($uniqueId === Yii::$app->getErrorHandler()->errorAction) {
             return false;
@@ -113,6 +125,7 @@ class AccessControl extends \yii\base\ActionFilter
         if ($action->controller->hasMethod('allowAction') && in_array($action->id, $action->controller->allowAction())) {
             return false;
         }
+
         return true;
     }
 }

@@ -1,14 +1,15 @@
 <?php
 
-namespace orcsis\admin\models;
+namespace mdm\admin\models;
 
 use yii\rbac\Rule;
 use Yii;
 
 /**
- * Description of BizRule
+ * BizRule
  *
- * @author MDMunir
+ * @author Misbahul D Munir <misbahuldmunir@gmail.com>
+ * @since 1.0
  */
 class BizRule extends \yii\base\Model
 {
@@ -28,19 +29,17 @@ class BizRule extends \yii\base\Model
     public $updatedAt;
 
     /**
-     *
-     * @var string 
+     * @var string Rule classname.
      */
     public $className;
 
     /**
-     *
-     * @var Rule 
+     * @var Rule
      */
     private $_item;
 
     /**
-     * 
+     * Initilaize object
      * @param \yii\rbac\Rule $item
      * @param array $config
      */
@@ -66,6 +65,9 @@ class BizRule extends \yii\base\Model
         ];
     }
 
+    /**
+     * Validate class exists
+     */
     public function classExists()
     {
         if (!class_exists($this->className) || !is_subclass_of($this->className, Rule::className())) {
@@ -79,24 +81,39 @@ class BizRule extends \yii\base\Model
     public function attributeLabels()
     {
         return [
-            'name' => 'Name',
+            'name' => Yii::t('rbac-admin', 'Name'),
+            'className' => Yii::t('rbac-admin', 'Class Name'),
         ];
     }
 
+    /**
+     * Check if new record.
+     * @return boolean
+     */
     public function getIsNewRecord()
     {
         return $this->_item === null;
     }
 
+    /**
+     * Find model by id
+     * @param type $id
+     * @return null|static
+     */
     public static function find($id)
     {
         $item = Yii::$app->authManager->getRule($id);
         if ($item !== null) {
-            return new self($item);
+            return new static($item);
         }
+
         return null;
     }
 
+    /**
+     * Save model to authManager
+     * @return boolean
+     */
     public function save()
     {
         if ($this->validate()) {
@@ -116,6 +133,7 @@ class BizRule extends \yii\base\Model
             } else {
                 $manager->update($oldName, $this->_item);
             }
+
             return true;
         } else {
             return false;
@@ -123,7 +141,7 @@ class BizRule extends \yii\base\Model
     }
 
     /**
-     * 
+     * Get item
      * @return Item
      */
     public function getItem()
