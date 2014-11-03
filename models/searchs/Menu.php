@@ -1,14 +1,14 @@
 <?php
 
-namespace mdm\admin\models\searchs;
+namespace orcsis\admin\models\searchs;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use mdm\admin\models\Menu as MenuModel;
+use orcsis\admin\models\Menu as MenuModel;
 
 /**
- * Menu represents the model behind the search form about [[\mdm\admin\models\Menu]].
+ * Menu represents the model behind the search form about [[\orcsis\admin\models\Menu]].
  * 
  * @author Misbahul D Munir <misbahuldmunir@gmail.com>
  * @since 1.0
@@ -22,8 +22,8 @@ class Menu extends MenuModel
     public function rules()
     {
         return [
-            [['id', 'parent', 'order'], 'integer'],
-            [['name', 'route', 'parent_name'], 'safe'],
+            [['men_id', 'men_parent', 'men_orden'], 'integer'],
+            [['men_nombre', 'men_url', 'parent_name'], 'safe'],
         ];
     }
 
@@ -46,7 +46,7 @@ class Menu extends MenuModel
         $query = MenuModel::find()
             ->from(MenuModel::tableName() . ' t')
             ->joinWith(['menuParent' => function ($q) {
-            $q->from(MenuModel::tableName() . ' parent');
+            $q->from(MenuModel::tableName() . ' men_parent');
         }]);
 
         $dataProvider = new ActiveDataProvider([
@@ -54,30 +54,30 @@ class Menu extends MenuModel
         ]);
 
         $sort = $dataProvider->getSort();
-        $sort->attributes['menuParent.name'] = [
-            'asc' => ['parent.name' => SORT_ASC],
-            'desc' => ['parent.name' => SORT_DESC],
-            'label' => 'parent',
+        $sort->attributes['menuParent.men_nombre'] = [
+            'asc' => ['men_parent.men_nombre' => SORT_ASC],
+            'desc' => ['men_parent.men_nombre' => SORT_DESC],
+            'label' => 'men_parent',
         ];
-        $sort->attributes['order'] = [
-            'asc' => ['parent.order' => SORT_ASC, 't.order' => SORT_ASC],
-            'desc' => ['parent.order' => SORT_DESC, 't.order' => SORT_DESC],
-            'label' => 'order',
+        $sort->attributes['men_orden'] = [
+            'asc' => ['men_parent.men_orden' => SORT_ASC, 't.men_orden' => SORT_ASC],
+            'desc' => ['men_parent.men_orden' => SORT_DESC, 't.men_orden' => SORT_DESC],
+            'label' => 'men_orden',
         ];
-        $sort->defaultOrder = ['menuParent.name' => SORT_ASC];
+        $sort->defaultOrder = ['menuParent.men_nombre' => SORT_ASC];
 
         if (!($this->load($params) && $this->validate())) {
             return $dataProvider;
         }
 
         $query->andFilterWhere([
-            't.id' => $this->id,
-            't.parent' => $this->parent,
+            't.men_id' => $this->id,
+            't.men_parent' => $this->men_parent,
         ]);
 
-        $query->andFilterWhere(['like', 'lower(t.name)', strtolower($this->name)])
-            ->andFilterWhere(['like', 't.route', $this->route])
-            ->andFilterWhere(['like', 'lower(parent.name)', strtolower($this->parent_name)]);
+        $query->andFilterWhere(['like', 'lower(t.men_nnombre)', strtolower($this->men_nombre)])
+            ->andFilterWhere(['like', 't.men_url', $this->men_url])
+            ->andFilterWhere(['like', 'lower(men_parent.men_nombre)', strtolower($this->parent_name)]);
 
         return $dataProvider;
     }

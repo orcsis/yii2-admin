@@ -43,7 +43,7 @@ Once the extension is installed, simply modify your application configuration as
 return [
 	'modules' => [
 		'admin' => [
-			'class' => 'mdm\admin\Module',
+			'class' => 'orcsis\admin\Module',
             ...
 		]
 		...
@@ -56,7 +56,7 @@ return [
 		]
 	],
     'as access' => [
-        'class' => 'mdm\admin\components\AccessControl',
+        'class' => 'orcsis\admin\components\AccessControl',
 		'allowActions' => [
 			'admin/*', // add or remove allowed actions to this list
 		]
@@ -95,7 +95,7 @@ Some controller property maybe need to change. To do that, change it via `contro
 			...,
             'controllerMap' => [
                  'assignment' => [
-                    'class' => 'mdm\admin\controllers\AssignmentController',
+                    'class' => 'orcsis\admin\controllers\AssignmentController',
                     'userClassName' => 'path\to\models\User',
                     'idField' => 'user_id', // id field of model User
                 ]

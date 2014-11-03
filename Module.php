@@ -1,6 +1,6 @@
 <?php
 
-namespace mdm\admin;
+namespace orcsis\admin;
 
 use Yii;
 use yii\helpers\Inflector;
@@ -15,7 +15,7 @@ use yii\helpers\Inflector;
  * 'layout' => 'left-menu', // default to null mean use application layout.
  * 'controllerMap' => [
  *     'assignment' => [
- *         'class' => 'mdm\admin\controllers\AssignmentController',
+ *         'class' => 'orcsis\admin\controllers\AssignmentController',
  *         'userClassName' => 'app\models\User',
  *         'idField' => 'id'
  *     ]
@@ -38,6 +38,10 @@ use yii\helpers\Inflector;
  */
 class Module extends \yii\base\Module
 {
+	/**
+     * @var string Nombre
+     */
+    public $name = 'Administrar';
 
 	public function init()
     {

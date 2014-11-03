@@ -6,7 +6,7 @@ use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
-/* @var $searchModel mdm\admin\models\searchs\Menu */
+/* @var $searchModel orcsis\admin\models\searchs\Menu */
 
 $this->title = Yii::t('rbac-admin', 'Menus');
 $this->params['breadcrumbs'][] = $this->title;
@@ -28,15 +28,15 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             [
-                'attribute' => 'menuParent.name',
+                'attribute' => 'menuParent.men_nombre',
                 'filter' => Html::activeTextInput($searchModel, 'parent_name', [
                     'class' => 'form-control', 'id' => null
                 ]),
                 'label' => Yii::t('rbac-admin', 'Parent'),
             ],
-            'name',
-            'route',
-            'order',
+            'men_nombre',
+            'men_url',
+            'men_orden',
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]);

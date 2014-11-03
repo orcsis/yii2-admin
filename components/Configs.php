@@ -1,6 +1,6 @@
 <?php
 
-namespace mdm\admin\components;
+namespace orcsis\admin\components;
 
 use Yii;
 use yii\db\Connection;
@@ -24,7 +24,7 @@ use yii\helpers\ArrayHelper;
  * or use [[\Yii::$container]]
  * 
  * ~~~
- * Yii::$container->set('mdm\admin\components\Configs',[
+ * Yii::$container->set('orcsis\admin\components\Configs',[
  *     'db' => 'customDb',
  *     'menuTable' => 'admin_menu',
  * ]);
@@ -53,7 +53,7 @@ class Configs extends \yii\base\Object
     /**
      * @var string Menu table name.
      */
-    public $menuTable = '{{%menu}}';
+    public $menuTable = 'osmenu';
     
     /**
      * @var self Instance of self
@@ -98,5 +98,11 @@ class Configs extends \yii\base\Object
         }
 
         return self::$_instance;
+    }
+	
+	public static function getModules()
+    {
+    	$modules = Yii::$app->getModules();
+    	return array_merge([Yii::$app->id], array_keys($modules));
     }
 }

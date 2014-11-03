@@ -5,7 +5,7 @@ use yii\widgets\ActiveForm;
 
 /**
  * @var yii\web\View $this
- * @var mdm\admin\models\searchs\Menu $model
+ * @var orcsis\admin\models\searchs\Menu $model
  * @var yii\widgets\ActiveForm $form
  */
 ?>
@@ -17,15 +17,15 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'id') ?>
+    <?= $form->field($model, 'men_id') ?>
 
-    <?= $form->field($model, 'name') ?>
+    <?= $form->field($model, 'men_nombre') ?>
 
-    <?= $form->field($model, 'parent') ?>
+    <?= $form->field($model, 'men_parent') ?>
 
-    <?= $form->field($model, 'route') ?>
+    <?= $form->field($model, 'men_url') ?>
 
-    <?= $form->field($model, 'data') ?>
+    <?= $form->field($model, 'men_data') ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('rbac-admin', 'Search'), ['class' => 'btn btn-primary']) ?>

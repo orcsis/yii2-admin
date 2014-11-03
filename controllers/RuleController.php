@@ -1,14 +1,14 @@
 <?php
 
-namespace mdm\admin\controllers;
+namespace orcsis\admin\controllers;
 
 use Yii;
-use mdm\admin\models\BizRule;
+use orcsis\admin\models\BizRule;
 use yii\web\Controller;
-use mdm\admin\models\searchs\BizRule as BizRuleSearch;
+use orcsis\admin\models\searchs\BizRule as BizRuleSearch;
 use yii\filters\VerbFilter;
 use yii\web\NotFoundHttpException;
-use mdm\admin\components\MenuHelper;
+use orcsis\admin\components\MenuHelper;
 
 /**
  * Description of RuleController

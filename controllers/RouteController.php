@@ -1,15 +1,15 @@
 <?php
 
-namespace mdm\admin\controllers;
+namespace orcsis\admin\controllers;
 
 use Yii;
-use mdm\admin\models\Route;
-use mdm\admin\components\MenuHelper;
+use orcsis\admin\models\Route;
+use orcsis\admin\components\MenuHelper;
 use yii\caching\TagDependency;
 use yii\web\Response;
 use yii\helpers\Html;
-use mdm\admin\components\RouteRule;
-use mdm\admin\components\Configs;
+use orcsis\admin\components\RouteRule;
+use orcsis\admin\components\Configs;
 use yii\helpers\Inflector;
 use yii\helpers\VarDumper;
 use Exception;

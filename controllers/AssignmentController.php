@@ -1,15 +1,15 @@
 <?php
 
-namespace mdm\admin\controllers;
+namespace orcsis\admin\controllers;
 
 use Yii;
-use mdm\admin\models\Assignment;
-use mdm\admin\models\searchs\Assignment as AssignmentSearch;
+use orcsis\admin\models\Assignment;
+use orcsis\admin\models\searchs\Assignment as AssignmentSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\helpers\Html;
-use mdm\admin\components\MenuHelper;
+use orcsis\admin\components\MenuHelper;
 use yii\web\Response;
 use yii\rbac\Item;
 

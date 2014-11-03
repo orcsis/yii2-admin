@@ -1,6 +1,6 @@
 <?php
 
-namespace mdm\admin\components;
+namespace orcsis\admin\components;
 
 use yii\web\ForbiddenHttpException;
 use yii\base\Module;
@@ -18,7 +18,7 @@ use yii\di\Instance;
  *
  * ~~~
  * 'as access' => [
- *     'class' => 'mdm\admin\components\AccessControl',
+ *     'class' => 'orcsis\admin\components\AccessControl',
  *     'allowActions' => ['site/login', 'site/error']
  * ]
  * ~~~
@@ -88,6 +88,8 @@ class AccessControl extends \yii\base\ActionFilter
      */
     protected function isActive($action)
     {
+    	Yii::$app->params['moduleActive']['module'] = $action->controller->module->id;
+    	Yii::$app->params['moduleActive']['name'] = isset($action->controller->module->name) ? $action->controller->module->name : Yii::$app->params['moduleActive']['name'];
         $uniqueId = $action->getUniqueId();
         if ($uniqueId === Yii::$app->getErrorHandler()->errorAction) {
             return false;

@@ -1,6 +1,6 @@
 <?php
 
-namespace mdm\admin;
+namespace orcsis\admin;
 
 /**
  * AdminAsset
@@ -13,7 +13,7 @@ class AdminAsset extends \yii\web\AssetBundle
     /**
      * @inheritdoc
      */
-    public $sourcePath = '@mdm/admin/assets';
+    public $sourcePath = '@orcsis/admin/assets';
 
     /**
      * @inheritdoc

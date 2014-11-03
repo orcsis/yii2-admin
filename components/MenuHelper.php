@@ -1,17 +1,17 @@
 <?php
 
-namespace mdm\admin\components;
+namespace orcsis\admin\components;
 
 use Yii;
 use yii\caching\TagDependency;
-use mdm\admin\models\Menu;
+use orcsis\admin\models\Menu;
 
 /**
  * MenuHelper used to generate menu depend of user role.
  * Usage
  * 
  * ~~~
- * use mdm\admin\components\MenuHelper;
+ * use orcsis\admin\components\MenuHelper;
  * use yii\bootstrap\Nav;
  *
  * echo Nav::widget([
@@ -70,7 +70,7 @@ class MenuHelper
 
         /* @var $manager \yii\rbac\BaseManager */
         $manager = Yii::$app->getAuthManager();
-        $menus = Menu::find()->asArray()->indexBy('id')->all();
+        $menus = Menu::find()->asArray()->indexBy('men_id')->all();
         $key = [__METHOD__, $userId, $manager->defaultRoles];
         $cache = $config->cache;
 
@@ -110,12 +110,13 @@ class MenuHelper
                 }
             }
             $assigned = [];
-            $query = Menu::find()->select(['id'])->asArray();
+			$cWhereModule = '(men_modulo = \'' . Yii::$app->params['moduleActive']['module'] . '\' OR men_modulo = \'\')';
+            $query = Menu::find()->select(['men_id'])->asArray();
             if (count($filter2)) {
-                $assigned = $query->where(['route' => $filter2])->column();
+                $assigned = $query->where(['men_modulo' => [Yii::$app->params['moduleActive']['module'], ''] ,'men_url' => $filter2])->column();
             }
             if (count($filter1)) {
-                $query->where('route like :filter');
+                $query->where('men_url like :filter and ' . $cWhereModule);
                 foreach ($filter1 as $filter) {
                     $assigned = array_merge($assigned, $query->params([':filter' => $filter])->column());
                 }
@@ -152,7 +153,7 @@ class MenuHelper
         $l = count($assigned);
         for ($i = 0; $i < $l; $i++) {
             $id = $assigned[$i];
-            $parent_id = $menus[$id]['parent'];
+            $parent_id = $menus[$id]['men_parent'];
             if ($parent_id !== null && !in_array($parent_id, $assigned)) {
                 $assigned[$l++] = $parent_id;
             }
@@ -198,21 +199,21 @@ class MenuHelper
         $order = [];
         foreach ($assigned as $id) {
             $menu = $menus[$id];
-            if ($menu['parent'] == $parent) {
+            if ($menu['men_parent'] == $parent) {
                 $menu['children'] = static::normalizeMenu($assigned, $menus, $callback, $id);
                 if ($callback !== null) {
                     $item = call_user_func($callback, $menu);
                 } else {
                     $item = [
-                        'label' => $menu['name'],
-                        'url' => static::parseRoute($menu['route']),
+                        'label' => $menu['men_nombre'],
+                        'url' => static::parseRoute($menu['men_url']),
                     ];
                     if ($menu['children'] != []) {
                         $item['items'] = $menu['children'];
                     }
                 }
                 $result[] = $item;
-                $order[] = $menu['order'];
+                $order[] = $menu['men_orden'];
             }
         }
         if ($result != []) {

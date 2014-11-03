@@ -1,6 +1,6 @@
 <?php
 
-namespace mdm\admin\components;
+namespace orcsis\admin\components;
 
 /**
  * RouteRule Rule for check route with extra params.
