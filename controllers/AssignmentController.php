@@ -22,8 +22,8 @@ use yii\rbac\Item;
 class AssignmentController extends Controller
 {
     public $userClassName;
-    public $idField = 'id';
-    public $usernameField = 'username';
+    public $idField = 'usu_id';
+    public $usernameField = 'usu_nomusu';
     public $searchClass;
 
     /**
