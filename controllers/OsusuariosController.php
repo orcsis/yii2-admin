@@ -150,4 +150,22 @@ class OsusuariosController extends Controller
             throw new NotFoundHttpException(Yii::t('app','The requested page does not exist.'));
         }
     }
+
+    /**
+    * Actualiza la Contraseña del Usuario
+    **/
+    public function actionChangePassword($id)
+    {
+        $model = $this->findModel($id);
+        $post = Yii::$app->request->post();
+        if(isset($post['password']) && !$model->validatePassword($post['Osusuarios']['usu_clave']))
+        {
+            $model->setPassword($post['password']);
+        }
+        if ($model->save()) {
+        	return $this->redirect(['view', 'id' => $model->usu_id]);
+        } else {
+        	return $this->render('view', ['model' => $model]);
+        }
+    }
 }
