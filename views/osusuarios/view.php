@@ -3,6 +3,8 @@
 use yii\helpers\Html;
 use orcsis\widgets\DetailView;
 use kartik\datecontrol\DateControl;
+use kartik\widgets\FileInput;
+use kartik\icons\Icon;
 
 /**
  * @var yii\web\View $this
@@ -21,8 +23,17 @@ $this->params['breadcrumbs'][] = $model->usu_nomusu;
 
     <?= DetailView::widget([
             'model' => $model,
+            'condensed'=>false,
+            'hover'=>true,
             'mode'=>Yii::$app->request->get('edit')=='t' ? DetailView::MODE_EDIT : DetailView::MODE_VIEW,
-        	'attributes' => [
+            'panel'=>[
+            	'heading'=>$this->title,
+            	'type'=>DetailView::TYPE_INFO,
+        	],
+        	'formOptions' => [
+        		'options' => ['enctype' => 'multipart/form-data']
+        	],
+        'attributes' => [
             //'usu_id',
             [
             	'attribute'=>'uploadedFile',
@@ -34,7 +45,19 @@ $this->params['breadcrumbs'][] = $model->usu_nomusu;
             		'<a href="#" class="thumbnail">
                         <img src="'.Yii::$app->params['assetUrl'].'images/noavatar_man.png" alt="" class="">
                     </a>',
-            	'type'=>DetailView::INPUT_FILE
+            	'type'=>DetailView::INPUT_WIDGET,
+            	'widgetOptions'=> [
+                    'class'=>FileInput::classname(),
+    				'pluginOptions' => [
+    					'showCaption' => false,
+    					'showRemove' => false,
+    					'showUpload' => false,
+    					'browseClass'=> 'btn btn-primary btn-block',
+    					'browseIcon' => '<i class="glyphicon glyphicon-camera"></i> ',
+    					'browseLabel' =>  Yii::t('admin','Select Photo')
+    				],
+    				'options' => ['accept' => 'image/*'],	
+                ]
             ],
             'usu_nomusu',
             'usu_nombre',
@@ -46,6 +69,7 @@ $this->params['breadcrumbs'][] = $model->usu_nomusu;
                 'attribute'=>'usu_feccre',
                 'format'=>['datetime',(isset(Yii::$app->modules['datecontrol']['displaySettings']['datetime'])) ? Yii::$app->modules['datecontrol']['displaySettings']['datetime'] : 'd-m-Y H:i:s A'],
                 'type'=>DetailView::INPUT_WIDGET,
+                'displayOnly'=> true,
                 'widgetOptions'=> [
                     'class'=>DateControl::classname(),
                     'type'=>DateControl::FORMAT_DATETIME
@@ -55,6 +79,7 @@ $this->params['breadcrumbs'][] = $model->usu_nomusu;
                 'attribute'=>'usu_ulting',
                 'format'=>['datetime',(isset(Yii::$app->modules['datecontrol']['displaySettings']['datetime'])) ? Yii::$app->modules['datecontrol']['displaySettings']['datetime'] : 'd-m-Y H:i:s A'],
                 'type'=>DetailView::INPUT_WIDGET,
+                'displayOnly'=> true,
                 'widgetOptions'=> [
                     'class'=>DateControl::classname(),
                     'type'=>DateControl::FORMAT_DATETIME
@@ -69,7 +94,10 @@ $this->params['breadcrumbs'][] = $model->usu_nomusu;
             	'type'=>DetailView::INPUT_SWITCH
             ],
             //'usu_token',
-            'usu_ultemp',
+            [
+            	'attribute'=>'usu_ultemp',
+            	'displayOnly'=>true
+            ],
             //'usu_foto',
             //'usu_name',
             //'usu_type',
@@ -83,6 +111,13 @@ $this->params['breadcrumbs'][] = $model->usu_nomusu;
         ],
         ],
         'enableEditMode'=>true,
+        'buttons'=>[
+        	[
+        		'label'=>Icon::show('key'),
+        		'title'=>Yii::t('admin','Change Password')
+        		
+        	]
+        ]
     ]) ?>
 
 </div>
