@@ -48,20 +48,9 @@ class OsusuariosController extends Controller
      */
     public function actionView($id)
     {
-    	$passChanged = false;
         $model = $this->findModel($id);
-        $post = Yii::$app->request->post();
-        
-        if(isset($post['Osusuarios']['usu_clave']) && !$model->validatePassword($post['Osusuarios']['usu_clave']) ) {
-        	$passChanged = true;
-        }
-        
-        $val = $model->load($post);
-        if($val && $passChanged) {
-        	$model->setPassword($model->usu_clave);
-        }
 
-        if ($val && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
         return $this->redirect(['view', 'id' => $model->usu_id]);
         } else {
         return $this->render('view', ['model' => $model]);

@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use orcsis\admin\models\Menu;
+use orcsis\admin\components\Configs;
 
 /* @var $this yii\web\View */
 /* @var $model orcsis\admin\models\Menu */
@@ -20,6 +21,13 @@ use orcsis\admin\models\Menu;
         'options'=>['class'=>'form-control'],
         'clientOptions'=>[
             'source'=>  Menu::find()->select(['men_nombre'])->column()
+        ]
+    ]) ?>
+
+    <?= $form->field($model, 'men_modulo')->widget('yii\jui\AutoComplete',[
+        'options'=>['class'=>'form-control'],
+        'clientOptions'=>[
+            'source'=>  Configs::getModules()
         ]
     ]) ?>
 

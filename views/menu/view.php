@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model orcsis\admin\models\Menu */
 
-$this->title = $model->name;
+$this->title = $model->men_nombre;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('rbac-admin', 'Menus'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

@@ -60,7 +60,7 @@ class Menu extends \yii\db\ActiveRecord
                 'message' => 'Menu "{value}" no encontrado.'],
 			[['men_modulo'], 'in',
 				'range' => Configs::getModules(),
-                'message' => 'Módulo "{value}" no encontrado.'],
+                'message' => 'Modulo "{value}" no encontrado.'],
             [['men_parent', 'men_url', 'men_data', 'men_orden', 'men_modulo'], 'default'],
             [['men_orden'], 'integer'],
             [['men_url'], 'in',

@@ -110,7 +110,7 @@ class MenuHelper
                 }
             }
             $assigned = [];
-			$cWhereModule = '(men_modulo = \'' . Yii::$app->params['moduleActive']['module'] . '\' OR men_modulo = \'\')';
+			$cWhereModule = '(men_modulo = \'' . Yii::$app->params['moduleActive']['module'] . '\' OR men_modulo = \'\' OR men_modulo IS NULL)';
             $query = Menu::find()->select(['men_id'])->asArray();
             if (count($filter2)) {
                 $assigned = $query->where(['men_modulo' => [Yii::$app->params['moduleActive']['module'], ''] ,'men_url' => $filter2])->column();

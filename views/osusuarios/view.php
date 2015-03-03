@@ -5,6 +5,8 @@ use orcsis\widgets\DetailView;
 use kartik\datecontrol\DateControl;
 use kartik\widgets\FileInput;
 use kartik\icons\Icon;
+use kartik\popover\PopoverX;
+use kartik\password\PasswordInput;
 
 /**
  * @var yii\web\View $this
@@ -114,7 +116,15 @@ $this->params['breadcrumbs'][] = $model->usu_nomusu;
         'buttons'=>[
         	[
         		'label'=>Icon::show('key'),
-        		'title'=>Yii::t('admin','Change Password')
+        		'title'=>Yii::t('admin','Change Password'),
+                'html' => PopoverX::widget([
+                    'header' => '<i class="glyphicon glyphicon-lock"></i> ' . Yii::t('admin','Change Password'),
+                    'placement' => PopoverX::ALIGN_BOTTOM_RIGHT,
+                    'size' => PopoverX::SIZE_LARGE,
+                    'footer'=>Html::submitButton(Yii::t('admin','Enviar'), ['class'=>'btn btn-sm btn-primary']),
+                    'content' => '<label class="control-label">'.Yii::t('admin','Password').'</label>' . PasswordInput::widget(['model' => $model,'attribute' => 'passwd']),
+                    'toggleButton' => ['label'=>Icon::show('key'), 'class'=>'btn btn-xs btn-info'],
+                ])
         		
         	]
         ]
