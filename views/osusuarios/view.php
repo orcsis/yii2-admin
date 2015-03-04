@@ -123,7 +123,7 @@ $this->params['breadcrumbs'][] = $model->usu_nomusu;
                     'size' => PopoverX::SIZE_LARGE,
                     'footer'=>Html::submitButton(Yii::t('admin','Enviar'), ['class'=>'btn btn-sm btn-primary']),
                     'content' => '<label class="control-label">'.Yii::t('admin','Password').'</label>' . PasswordInput::widget(['model' => $model,'attribute' => 'passwd']),
-                    'toggleButton' => ['label'=>Icon::show('key'), 'class'=>'btn btn-xs btn-info'],
+                    'toggleButton' => ['label'=>Icon::show('key'), 'class'=>'btn btn-xs btn-info', 'data-toggle'=>'tooltip', 'data-original-title'=>Yii::t('admin','Change Password')],
                 ])
         		
         	]
