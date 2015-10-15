@@ -55,12 +55,12 @@ class AccessControl extends \yii\base\ActionFilter
         $actionId = $action->getUniqueId();
         $user = $this->user;
         if ($user->can('/' . $actionId)) {
-            return true;
+            return $this->validateOsempresa($user, $actionId);
         }
         $obj = $action->controller;
         do {
             if ($user->can('/' . ltrim($obj->getUniqueId() . '/*', '/'))) {
-                return true;
+                return $this->validateOsempresa($user, $actionId);
             }
             $obj = $obj->module;
         } while ($obj !== null);
@@ -81,6 +81,20 @@ class AccessControl extends \yii\base\ActionFilter
         } else {
             throw new ForbiddenHttpException(Yii::t('yii', 'You are not allowed to perform this action.'));
         }
+    }
+
+    /**
+     * @inheritdoc
+     */
+    protected function validateOsempresa($user, $actionId)
+    {
+        if (isset($user->identity->osempresa->permissionName) && (!$user->can($user->identity->osempresa->permissionName) || !$user->identity->osempresa->emp_estado))
+        {
+            $osusuario = Yii::$app->user->getidentity();
+            $osusuario->setEmpresa(null);
+            $osusuario->save();
+        }
+        return true;
     }
 
     /**

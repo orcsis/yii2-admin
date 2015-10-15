@@ -7,12 +7,12 @@ use kartik\datecontrol\DateControl;
 
 /**
  * @var yii\web\View $this
- * @var common\models\Osempresas $model
+ * @var common\models\Osopctab $model
  * @var yii\widgets\ActiveForm $form
  */
 ?>
 
-<div class="osempresas-form">
+<div class="osopctab-form">
 
     <?php $form = ActiveForm::begin(['type'=>ActiveForm::TYPE_HORIZONTAL]); echo Form::widget([
 
@@ -21,13 +21,13 @@ use kartik\datecontrol\DateControl;
     'columns' => 1,
     'attributes' => [
 
-'emp_estado'=>['type'=> Form::INPUT_TEXT, 'options'=>['placeholder'=>'Enter Activo...']], 
+'opt_opcion'=>['type'=> Form::INPUT_TEXT, 'options'=>['placeholder'=>'Enter Opción...']], 
 
-'emp_nombre'=>['type'=> Form::INPUT_TEXT, 'options'=>['placeholder'=>'Enter Nombre de Empresa...', 'maxlength'=>50]], 
+'opt_tabla'=>['type'=> Form::INPUT_TEXT, 'options'=>['placeholder'=>'Enter Tabla...', 'maxlength'=>45]], 
 
-'emp_datos'=>['type'=> Form::INPUT_WIDGET,
-			  'widgetClass' => '\yii\widgets\MaskedInput',
-			  'options'=>['mask' => 'A{0,15}9{0,5}']], 
+'opt_campo'=>['type'=> Form::INPUT_TEXT, 'options'=>['placeholder'=>'Enter Campo...', 'maxlength'=>45]], 
+
+'opt_descri'=>['type'=> Form::INPUT_TEXT, 'options'=>['placeholder'=>'Enter Descripción...', 'maxlength'=>60]], 
 
     ]
 
